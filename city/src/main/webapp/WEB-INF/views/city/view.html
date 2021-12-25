@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>City Information</title>
+    <th:block th:replace="~{/layout/head::head}"></th:block>
+</head>
+<body>
+<h1>Thông tin về thành phố <span th:text="${city.fullName}"></span> </h1>
+<button type="button" class="btn btn-outline-light" style="float: right;"
+        onclick="window.location.href='/cities'">
+    <i class="fa fa-list"></i>
+    <span>Danh sách thành phố</span>
+</button>
+<br>
+<label>Tên:</label>
+<label> <span th:text="${city.fullName}"></span></label>
+<br>
+<label>Quốc gia : </label>
+<label>  <span th:text="${city.country.fullName}"></span></label>
+<br>
+<label>Diện tích : </label>
+<label> <span th:text="${city.acreage}"></span></label>
+<br>
+<label>Dân Số: </label>
+<label>  <span th:text="${city.population}"></span></label>
+<br>
+<label>GDP:</label>
+<label>  <span th:text="${city.gdp}"></span></label>
+<br>
+<label>Giới thiệu</label>
+<br>
+<label>
+    <span th:text="${city.description}"></span>
+</label>
+
+
+
+<th:block th:replace="~{/layout/script:: script_all}"></th:block>
+</body>
+</html>

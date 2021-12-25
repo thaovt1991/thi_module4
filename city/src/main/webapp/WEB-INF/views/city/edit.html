@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>City List</title>
+    <th:block th:replace="~{/layout/head::head}"></th:block>
+</head>
+<body>
+<h1>Sua thong tin thanh pho</h1>
+<button type="button" class="btn btn-outline-primary" style="float: right;"
+        onclick="window.location.href='/cities'">
+    <i class="fa fa-list"></i>
+    <span>Danh sách thành phố</span>
+</button>
+
+<form id="#frmEditCity" th:action="@{/edit}" th:object="${city}" method="post">
+
+    <div class="row">
+        <input th:type="hidden" name="id" th:field="*{id}">
+        <div class="col-md-6">
+            <label class="form-label">Tên :</label>
+            <input type="text" class="form-control"
+                   th:field="*{fullName}" required>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Quốc gia</label>
+            <select name="country" class="form-select">
+                <option th:each="item : ${countries}" th:value="${item.id}" th:text="'(' + ${item.id} + ') ' + ${item.fullName}"></option>
+            </select>
+
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Diện tích</label>
+            <input type="text" class="form-control"
+                   th:field="*{acreage}"  required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Dân số</label>
+            <input type="text" class="form-control"
+                   th:field="*{population}" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">GDP :</label>
+            <input type="text" class="form-control"
+                   th:field="*{gdp}">
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Mô tả :</label>
+            <input type="text" class="form-control"
+                   th:field="*{description}">
+        </div>
+
+        <div class="col-md-12">
+            <br>
+            <br>
+            <button type="submit" id="btnEditCity" class="btn btn-outline-primary">
+                <i class="fa fa-plus"></i>
+                Edit City
+            </button>
+        </div>
+    </div>
+</form>
+<div class="row footer">
+    <div id="message-alert">
+        <th:block th:if="${message}">
+            <div class="bg-success p-2 text-white "><span th:text="${message}"></span></div>
+        </th:block>
+        <th:block th:if="${error} ">
+            <div class="bg-danger bg-gradient p-2 text-white" th:text="${error}">
+                <p th:each="error : ${errorList}" th:text="${'*' + error.toString()}" ></p>
+            </div>
+        </th:block>
+    </div>
+</div>
+
+
+</table>
+
+
+
+
+<th:block th:replace="~{/layout/script:: script_all}"></th:block>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>City List</title>
+    <th:block th:replace="~{/layout/head::head}"></th:block>
+</head>
+<body>
+  <h1>Danh sách thành phố</h1>
+  <a type="button" class="btn btn-outline-primary"
+     data-toggle="tooltip" data-placement="top" title="Edit"
+     th:href="@{/create}">
+      <i class="far fa-plus-square"></i>
+      Create New City
+  </a>
+
+  <table class="table">
+      <thead>
+      <tr>
+          <th>#</th>
+          <th>Thành phố</th>
+          <th>Quốc gia</th>
+          <th colspan="2"></th>
+      </tr>
+      </thead>
+      <tbody>
+        <th:block th:each="city :${listCity}">
+            <tr>
+                <td th:text="${city.id}"></td>
+                <td >
+                    <a  th:href="@{/view/__${city.id}__ }">
+                       <span th:text="${city.fullName}"></span>
+                    </a>
+                </td>
+                <td th:text="${city.country.fullName}"></td>
+                <td>
+                    <a class="btn btn-outline-secondary"
+                       data-toggle="tooltip" data-placement="top" title="Edit"
+                       th:href="@{/edit/__${city.id}__ }">
+                        <i class="far fa-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-danger"
+                       data-toggle="tooltip" data-placement="top" title="Suspended"
+                       th:href="@{/delete/__${city.id}__ }"><i class="fas fa-ban"></i></a>
+                </td>
+            </tr>
+        </th:block>
+      </tbody>
+
+
+  </table>
+
+
+
+
+<th:block th:replace="~{/layout/script:: script_all}"></th:block>
+</body>
+</html>
